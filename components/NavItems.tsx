@@ -2,7 +2,13 @@ import { Link, NavLink } from "react-router";
 import { sidebarItems } from "~/constants";
 import { cn } from "~/lib/utils";
 
-const NavItems = () => {
+const NavItems = ({ handleClick }: { handleClick: () => void }) => {
+  const user = {
+    name: "Adrian",
+    email: "contact@jsmatery.pro",
+    imageURL: "/assets/images/david.webp",
+  };
+
   return (
     <section className="nav-items">
       <Link to="/" className="link-logo">
@@ -19,6 +25,7 @@ const NavItems = () => {
                   className={cn("group nav-item", {
                     "bg-primary-100 !text-white": isActive,
                   })}
+                  onClick={handleClick}
                 >
                   <img
                     src={icon}
@@ -33,6 +40,28 @@ const NavItems = () => {
             </NavLink>
           ))}
         </nav>
+        <footer className="nav-footer">
+          <img
+            src={user?.imageURL || "/assets/images/david.webp"}
+            alt={user?.name || "David"}
+          />
+          <article>
+            <h2>{user?.name}</h2>
+            <p>{user?.email}</p>
+          </article>
+          <button
+            onClick={() => {
+              console.log("logout");
+            }}
+            className="cursor-pointer"
+          >
+            <img
+              src="/assets/icons/logout.svg"
+              alt="logout"
+              className="size-6"
+            />
+          </button>
+        </footer>
       </div>
     </section>
   );
